@@ -1,12 +1,12 @@
                     1       * TEO RAM TESTER
                     2               OBJ $300
                     3               ORG $300
-0300: 20 58 FC      4       START   JSR $FC58		; clr
-0303: A9 65         5               LDA #$65     ; lsb
+0300: 20 58 FC      4       START   JSR $FC58    * clear screen, move upper left
+0303: A9 65         5               LDA #$65     * set lsb of starting address
 0305: 85 06         6               STA $06
-0307: A9 03         7               LDA #$03     ; msb
+0307: A9 03         7               LDA #$03     * set msb of starting address
 0309: 85 07         8               STA $07
-030B: A5 06         9       ILOOP   LDA $06
+030B: A5 06         9       ILOOP   LDA $06      * Loop through memory range
 030D: 20 DA FD      10              JSR $FDDA
 0310: A5 07         11              LDA $07
 0312: 20 DA FD      12              JSR $FDDA
@@ -15,10 +15,10 @@
 031A: D0 EF         15              BNE ILOOP
 031C: E6 07         16              INC $07
 031E: A5 07         17              LDA $07
-0320: C9 40         18              CMP #$40		; stop @ 16K
+0320: C9 40         18              CMP #$40     * stop @ 16K
 0322: 90 E7         19              BCC ILOOP
 0324: 60            20      END     RTS
-0325: A0 00         21      VRFY    LDY #$00
+0325: A0 00         21      VRFY    LDY #$00     * VRFY verifies r/w of FF and 00
 0327: A9 FF         22              LDA #$FF
 0329: 91 06         23              STA ($06),Y
 032B: B1 06         24              LDA ($06),Y
@@ -30,7 +30,7 @@
 0337: C9 00         30              CMP #$00
 0339: D0 01         31              BNE BTCK
 033B: 60            32              RTS
-033C: A9 01         33      BTCK    LDA #$01
+033C: A9 01         33      BTCK    LDA #$01    * BTCK verifies each bit of a byte
 033E: 85 08         34              STA $08
 0340: A5 08         35      BLOOP   LDA $08
 0342: 91 06         36              STA ($06),Y
